@@ -25,6 +25,37 @@ This repository is the starting point for small web applications used by non-tec
 
 Use another stack only when the application requirements justify it. Record the reason in `README.md`.
 
+## Application architecture
+
+Use one Next.js application. Do not introduce a monorepo, a separate backend, or extra architectural layers unless the requirements justify them.
+
+Keep application code in `src/` and add directories only when they are needed:
+
+```text
+src/
+  app/                 routes, layouts, loading and error UI, Route Handlers
+  features/            business features and their components, actions, data access, and schemas
+  components/ui/       reusable presentation components
+  lib/                 shared infrastructure clients and low-level helpers
+supabase/
+  migrations/          versioned database changes
+tests/
+  e2e/                 important Playwright workflows
+```
+
+Follow these boundaries:
+
+- Keep route files small. They should compose feature code rather than contain the full business implementation.
+- Use Server Components by default. Add `use client` only to the smallest component that needs browser state, effects, or event handlers.
+- Read data directly in Server Components or server-only feature modules. Do not create an internal HTTP API between the application and itself.
+- Use Server Actions for mutations initiated by the application UI.
+- Use Route Handlers for webhooks, scheduled tasks, public APIs, and integrations that require an HTTP endpoint.
+- Use the Node.js runtime by default. Choose the Edge runtime only for a documented requirement and after checking dependency compatibility.
+- Validate environment variables and untrusted input with Zod at the boundary where they enter the application.
+- Keep secrets and privileged clients in server-only modules. Never import them into Client Components.
+- Keep feature-specific code inside its feature. Move code into shared `components` or `lib` only when more than one feature uses it.
+- Keep unit and integration tests close to the code they verify. Put important browser workflows in `tests/e2e/`.
+
 ## Recommended agent skills
 
 When the application uses Supabase, use the official `supabase` and `supabase-postgres-best-practices` skills from `https://github.com/supabase/agent-skills` when they are available.
