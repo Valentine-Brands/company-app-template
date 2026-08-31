@@ -37,10 +37,12 @@ src/
   features/            business features and their components, actions, data access, and schemas
   components/ui/       reusable presentation components
   lib/                 shared infrastructure clients and low-level helpers
+  jobs/                scheduled task orchestration
 supabase/
   migrations/          versioned database changes
 tests/
   e2e/                 important Playwright workflows
+vercel.json             Vercel Cron paths and UTC schedules
 ```
 
 Follow these boundaries:
@@ -50,6 +52,9 @@ Follow these boundaries:
 - Read data directly in Server Components or server-only feature modules. Do not create an internal HTTP API between the application and itself.
 - Use Server Actions for mutations initiated by the application UI.
 - Use Route Handlers for webhooks, scheduled tasks, public APIs, and integrations that require an HTTP endpoint.
+- Put scheduled task orchestration in `src/jobs/<task-name>.ts` and keep business logic in the relevant feature. Keep `src/app/api/cron/<task-name>/route.ts` small: verify the cron request, call the task, and return its result.
+- Store Vercel Cron schedules in `vercel.json`. Document the intended business time and its UTC schedule in `README.md`.
+- Make scheduled tasks safe to run more than once. Prevent overlapping runs when duplicate work could modify data or trigger an outside action twice.
 - Use the Node.js runtime by default. Choose the Edge runtime only for a documented requirement and after checking dependency compatibility.
 - Validate environment variables and untrusted input with Zod at the boundary where they enter the application.
 - Keep secrets and privileged clients in server-only modules. Never import them into Client Components.
