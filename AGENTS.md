@@ -2,17 +2,46 @@
 
 ## Purpose
 
-This repository is the public starting point for a new company application. It intentionally does not select a framework before the application requirements are known.
+This repository is the starting point for small web applications used by non-technical teams.
 
-## Working agreement
+## Sources of truth
 
-- Start with the requested business outcome and user workflow before selecting a stack.
-- Prefer the smallest maintained stack that satisfies the requirements.
-- Keep architecture decisions and local setup instructions in `README.md`.
+- `AGENTS.md` contains the shared repository instructions.
+- `CLAUDE.md` imports `AGENTS.md` and contains only necessary Claude-specific additions.
+- `README.md` explains what the application does, how to run it, and which services it uses.
+
+## Default stack
+
+- Next.js App Router with TypeScript
+- npm
+- Tailwind CSS with shared brand tokens
+- Supabase Postgres when persistent data is required
+- Supabase Auth and Storage when required by the application
+- Zod for environment variables and untrusted input
+- Vercel for hosting
+- Vercel Cron with TypeScript Route Handlers for work that must run automatically at a specific time
+- Vitest for unit and integration tests
+- Playwright only for important browser workflows
+
+Use another stack only when the application requirements justify it. Record the reason in `README.md`.
+
+## Development
+
+- Understand the business workflow and intended users before selecting features.
+- Prefer the smallest implementation that satisfies the requested behavior.
 - Keep changes focused and preserve unrelated work.
-- Never commit credentials or populated environment files. Document required variables in `.env.example`.
-- Run the checks documented by the selected stack before reporting completion.
-- Do not create remote repositories, push code, deploy, purchase services, or change external systems without explicit user authorization.
+- Keep secrets server-side. Commit variable names in `.env.example`, never real values.
+- Track database changes in migrations.
+- Enable Row Level Security for Supabase tables exposed through the Data API.
+- Keep work that runs automatically at a specific time in TypeScript unless a concrete requirement needs another runtime.
+- Update `README.md` when setup, architecture, integrations, or operational behavior changes.
+- Run the documented checks before reporting completion. State clearly what was not tested.
+
+## External systems
+
+Do not create repositories, push code, deploy, purchase services, or change external systems without explicit user authorization.
+
+Features that send messages, move money, or modify data in another system require explicit production enablement and verification in that system.
 
 ## Public content
 
