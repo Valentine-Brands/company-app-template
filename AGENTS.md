@@ -25,6 +25,14 @@ This repository is the starting point for small web applications used by non-tec
 
 Use another stack only when the application requirements justify it. Record the reason in `README.md`.
 
+## Recommended agent skills
+
+When the application uses Supabase, use the official `supabase` and `supabase-postgres-best-practices` skills from `https://github.com/supabase/agent-skills` when they are available.
+
+Claude Code reads `.claude/settings.json` and offers these skills after the user trusts the repository. In Codex, if the skills are unavailable, point the user to the official repository and ask before installing them.
+
+Skills provide instructions only. Do not install an agent extension or connect Supabase MCP without explicit user approval.
+
 ## Development
 
 - Understand the business workflow and intended users before selecting features.
