@@ -14,6 +14,18 @@ Install `company-skills` in Claude Code or Codex, then ask:
 
 The `create-company-app` skill copies this starter into a fresh local Git repository and guides the remaining setup using the default stack in `AGENTS.md`.
 
+## Recommended agent skills
+
+Claude Code will offer the official Supabase skills after you trust the cloned repository. Accept them when the application uses Supabase.
+
+Codex users can install the same skills with:
+
+```bash
+npx skills add supabase/agent-skills
+```
+
+Installing these skills adds Supabase guidance to the agent. It does not connect the agent to a database or grant database access.
+
 ## Manual use
 
 Clone the repository, remove its existing Git history, initialize a new repository, and replace this README with documentation for the resulting application.
