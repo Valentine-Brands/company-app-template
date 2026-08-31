@@ -37,6 +37,21 @@ Use another stack only when the application requirements justify it. Record the 
 - Update `README.md` when setup, architecture, integrations, or operational behavior changes.
 - Run the documented checks before reporting completion. State clearly what was not tested.
 
+## Git workflow
+
+Use GitHub Flow with `main` as the only permanent branch. Keep `main` ready to deploy and do not commit application changes directly to it.
+
+For every feature or fix:
+
+1. Switch to `main` and pull the latest changes from GitHub.
+2. Create a short-lived branch from the updated `main`. Use a clear name such as `feature/customer-report` or `fix/login-error`.
+3. Make and verify the changes in that branch.
+4. Push the branch and open a Pull Request into `main`.
+5. Merge the Pull Request only after the required review and checks pass.
+6. Switch back to `main`, pull the merged changes, and start the next branch from that updated state.
+
+Delete merged branches when they are no longer needed. Do not reuse an old branch for unrelated work.
+
 ## External systems
 
 Do not create repositories, push code, deploy, purchase services, or change external systems without explicit user authorization.
