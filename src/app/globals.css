@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/* Starter tokens. Replace these together when applying a product's brand. */
+@theme {
+  --color-canvas: #f7f6f2;
+  --color-surface: #ffffff;
+  --color-ink: #222c28;
+  --color-muted: #59675f;
+  --color-line: #dcded6;
+  --color-accent: #a13b27;
+  --color-accent-soft: #f3e1d6;
+  --color-leaf: #e7ecdf;
+  --font-sans: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 5px;
+  }
+
+  ::selection {
+    background: var(--color-accent-soft);
+    color: var(--color-ink);
+  }
+}
+
+@layer components {
+  .button-primary {
+    @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none;
+  }
+}

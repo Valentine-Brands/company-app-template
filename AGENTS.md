@@ -81,6 +81,16 @@ Skills provide instructions only. Do not install an agent extension or connect S
 - Update `README.md` when setup, architecture, integrations, or operational behavior changes.
 - Run the documented checks before reporting completion. State clearly what was not tested.
 
+## Verification commands
+
+- Use Node.js 24 and `npm ci`; keep `package-lock.json` committed.
+- Run `npm run check` for formatting, ESLint, strict TypeScript, unit coverage, and the production build.
+- Run `npm run verify` for the full check, including desktop/mobile Playwright and automated accessibility. Install Chromium first with `npx playwright install chromium`.
+- Run `npm run audit` for dependency advisories. It fails on high or critical vulnerabilities and also runs as a separate CI job.
+- During development, run the focused command for the files changed. Before completing a feature, run the full required checks and report any checks not run.
+- Add meaningful tests alongside business logic. Use browser tests for user workflows and asynchronous Server Components. Extend coverage to new testable modules rather than treating the starter Button's coverage threshold as whole-app coverage.
+- Keep checks enabled; do not bypass failures with ignored TypeScript build errors, disabled lint rules, or skipped tests without explaining and addressing the underlying issue.
+
 ## Git workflow
 
 Use GitHub Flow with `main` as the only permanent branch. Keep `main` ready to deploy and do not commit application changes directly to it.

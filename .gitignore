@@ -13,3 +13,10 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+next-env.d.ts
+*.tsbuildinfo
+playwright-report/
+test-results/
+output/
+.vercel/
+*.log
