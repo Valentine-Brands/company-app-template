@@ -20,3 +20,5 @@ test-results/
 output/
 .vercel/
 *.log
+supabase/.temp/
+supabase/.branches/

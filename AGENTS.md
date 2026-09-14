@@ -29,7 +29,7 @@ Use another stack only when the application requirements justify it. Record the 
 
 Use one Next.js application. Do not introduce a monorepo, a separate backend, or extra architectural layers unless the requirements justify them.
 
-Keep application code in `src/` and add directories only when they are needed:
+Keep application code in `src/`. The optional database module and example migration are included but unused; add other directories when needed:
 
 ```text
 src/
@@ -88,7 +88,8 @@ Skills provide instructions only. Do not install an agent extension or connect S
 - Run `npm run verify` for the full check, including desktop/mobile Playwright and automated accessibility. Install Chromium first with `npx playwright install chromium`.
 - Run `npm run audit` for dependency advisories. It fails on high or critical vulnerabilities and also runs as a separate CI job.
 - During development, run the focused command for the files changed. Before completing a feature, run the full required checks and report any checks not run.
-- Add meaningful tests alongside business logic. Use browser tests for user workflows and asynchronous Server Components. Extend coverage to new testable modules rather than treating the starter Button's coverage threshold as whole-app coverage.
+- Keep tests proportional to risk. Cover important business rules, data access permissions, and a few critical user workflows. Do not require a test for every file, trivial wrapper, styling change, or framework behavior. Do not duplicate the same behavior at every test layer.
+- Coverage is an optional diagnostic report, not a target or a merge gate. Do not introduce percentage requirements or large test suites without a concrete need.
 - Keep checks enabled; do not bypass failures with ignored TypeScript build errors, disabled lint rules, or skipped tests without explaining and addressing the underlying issue.
 
 ## Git workflow

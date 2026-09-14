@@ -2,7 +2,7 @@
 
 A public starting point for small web applications created with the [`company-skills`](https://github.com/Valentine-Brands/company-skills) plugin.
 
-The starter includes a working Next.js App Router application with TypeScript, Tailwind CSS, a welcome page, error handling, and automated checks. It runs without API keys, a database, or a hosting account. Add Supabase, authentication, integrations, and scheduled tasks when an application needs them.
+The starter includes a working Next.js App Router application with TypeScript, Tailwind CSS, a welcome page, error handling, and automated checks. It runs without API keys, a database, or a hosting account. An optional Supabase module and example migration are already included but unused. Connect them, or add authentication, integrations, and scheduled tasks, when an application needs them.
 
 ## Run the application
 
@@ -42,13 +42,23 @@ The `create-company-app` skill copies this starter into a fresh local Git reposi
 | `src/features/welcome/`        | The starter homepage; replace it with the first business workflow     |
 | `src/components/ui/`           | Shared UI components with colocated unit tests                        |
 | `src/lib/`                     | Infrastructure and server-only environment validation                 |
+| `src/lib/db/`                  | Optional typed Supabase client; unused until a feature calls it       |
+| `src/features/example-notes/`  | Unused database query example                                         |
+| `supabase/`                    | Example migration and safe database setup instructions                |
+| `src/app/api/health/route.ts`  | Minimal Node.js server endpoint, independent of the database          |
 | `src/app/globals.css`          | Tailwind and replaceable starter color/font tokens                    |
 | `tests/e2e/`                   | Browser checks against the production build                           |
 | `.github/workflows/checks.yml` | Checks run by GitHub on pull requests and pushes to `main`            |
 
 The starter uses system fonts so builds do not need to download fonts. Its colors are starter defaults, not an approved company brand palette.
 
-Scheduled tasks belong in `src/jobs/<task-name>.ts`, with a thin handler at `src/app/api/cron/<task-name>/route.ts` and UTC schedules in a root `vercel.json`. Create those files with the first actual task. No schedule is active in this starter. Database migrations belong in `supabase/migrations/` when a database is added.
+Scheduled tasks belong in `src/jobs/<task-name>.ts`, with a thin handler at `src/app/api/cron/<task-name>/route.ts` and UTC schedules in a root `vercel.json`. Create those files with the first actual task. No schedule is active in this starter.
+
+## Optional database and server example
+
+The database client, example query, and migration are ready in the repository. They do not run automatically or require environment variables until used. See [database setup](supabase/README.md) before connecting a project. The example table is private by default; adding credentials alone does not grant access. There is no requirement for Docker, a local database, or Supabase Preview Branches.
+
+Open [localhost:3000/api/health](http://localhost:3000/api/health) to see the server return `{"status":"ok"}`. The handler runs inside Next.js on Node.js; no separate backend process is needed. It does not connect to the database.
 
 ## Check your changes
 
@@ -81,7 +91,9 @@ This checks formatting, code rules, TypeScript, unit tests and coverage, the pro
 
 Use `npm run format` to apply formatting, `npm run lint:fix` for automatic lint fixes, and `npm run test:watch` during development. `npm run test:e2e:ui` opens Playwright's test UI against the latest production build.
 
-The initial unit tests cover keyboard activation, disabled buttons, and form submission behavior. The reusable Button has a 100% coverage requirement; this is not a claim of full application coverage. Browser tests cover the homepage, its primary navigation, a real 404 response and recovery, mobile layout, and automated WCAG A/AA checks. Extend tests and coverage requirements as business features are added. Automated accessibility checks do not replace manual accessibility review.
+The starter has 3 unit tests and 3 browser scenarios, each run on desktop and mobile. Unit tests cover keyboard activation, disabled buttons, and form submission. Browser tests cover the homepage, its primary navigation, a real 404 response and recovery, mobile layout, and automated WCAG A/AA checks.
+
+Keep this small. Add tests for important business rules, access permissions, and critical workflows, not for every file, CSS change, or framework wrapper. Coverage reports are informational; there is no required percentage. Automated accessibility checks do not replace manual accessibility review.
 
 ## GitHub checks
 

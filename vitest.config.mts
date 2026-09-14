@@ -21,16 +21,7 @@ export default defineConfig({
         "src/features/**/*.{ts,tsx}",
       ],
       exclude: ["**/*.test.{ts,tsx}", "**/*.d.ts"],
-      // Server-rendered pages are exercised by Playwright. Keep unit coverage
-      // requirements focused on the reusable interactive component for now.
-      thresholds: {
-        "src/components/ui/button.tsx": {
-          statements: 100,
-          branches: 100,
-          functions: 100,
-          lines: 100,
-        },
-      },
+      // Coverage is informational. Do not add tests just to reach a percentage.
     },
   },
 });
